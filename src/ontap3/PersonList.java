@@ -70,13 +70,13 @@ public class PersonList {
     // Method to update student details
     private void updateStudentDetails(Student student) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter new Full Name (or press Enter to skip): ");
+        System.out.print("Enter new Full Name: ");
         String newName = scanner.nextLine();
         if (!newName.isEmpty()) {
             student.setFullName(newName);
         }
 
-        System.out.print("Enter new Date of Birth (dd/MM/yyyy) (or press Enter to skip): ");
+        System.out.print("Enter new Date of Birth (dd/MM/yyyy): ");
         String newDobString = scanner.nextLine();
         if (!newDobString.isEmpty()) {
             try {
