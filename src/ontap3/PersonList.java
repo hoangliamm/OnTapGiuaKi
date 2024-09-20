@@ -87,7 +87,7 @@ public class PersonList {
             }
         }
 
-        System.out.print("Enter new GPA (or press Enter to skip): ");
+        System.out.print("Enter new GPA : ");
         String gpaString = scanner.nextLine();
         if (!gpaString.isEmpty()) {
             try {
@@ -98,7 +98,7 @@ public class PersonList {
             }
         }
 
-        System.out.print("Enter new Major (or press Enter to skip): ");
+        System.out.print("Enter new Major : ");
         String newMajor = scanner.nextLine();
         if (!newMajor.isEmpty()) {
             student.setMajor(newMajor);
@@ -110,13 +110,13 @@ public class PersonList {
     // Method to update teacher details
     private void updateTeacherDetails(Teacher teacher) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter new Full Name (or press Enter to skip): ");
+        System.out.print("Enter new Full Name : ");
         String newName = scanner.nextLine();
         if (!newName.isEmpty()) {
             teacher.setFullName(newName);
         }
 
-        System.out.print("Enter new Date of Birth (dd/MM/yyyy) (or press Enter to skip): ");
+        System.out.print("Enter new Date of Birth (dd/MM/yyyy) : ");
         String newDobString = scanner.nextLine();
         if (!newDobString.isEmpty()) {
             try {
@@ -127,13 +127,13 @@ public class PersonList {
             }
         }
 
-        System.out.print("Enter new Department (or press Enter to skip): ");
+        System.out.print("Enter new Department : ");
         String newDepartment = scanner.nextLine();
         if (!newDepartment.isEmpty()) {
             teacher.setDeparment(newDepartment);
         }
 
-        System.out.print("Enter new Teaching Subject (or press Enter to skip): ");
+        System.out.print("Enter new Teaching Subject : ");
         String newSubject = scanner.nextLine();
         if (!newSubject.isEmpty()) {
             teacher.setTeacherSubject(newSubject);
