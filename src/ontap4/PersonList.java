@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.text.SimpleDateFormat;
 
-public class PersonList {
+public class PersonList  {
 
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -37,20 +37,20 @@ public class PersonList {
         return highestGPAStudent;
     }
 
-    public void updatePerson(String id) {
+    public void updatePersonById(String id) {
         Person person = findPersonById(id);
         if (person != null) {
             if (person instanceof Student) {
-                updateStudentDetails((Student) person);
+                updateStudent((Student) person);
             } else if (person instanceof Teacher) {
-                updateTeacherDetails((Teacher) person);
+                updateTeacher((Teacher) person);
             }
         } else {
             System.out.println("Person with ID " + id + " not found.");
         }
     }
 
-    public void deletePerson(String id) {
+    public void deletePersonById(String id) {
         people.removeIf(person -> person.getId().equals(id));
     }
 
@@ -63,7 +63,7 @@ public class PersonList {
         return null;
     }
 
-    private void updateStudentDetails(Student student) {
+    private void updateStudent(Student student) {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter new Full Name: ");
         String newName = scanner.nextLine();
@@ -102,7 +102,7 @@ public class PersonList {
         System.out.println("Student details updated successfully.");
     }
 
-    private void updateTeacherDetails(Teacher teacher) {
+    private void updateTeacher(Teacher teacher) {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter new Full Name: ");
         String newName = scanner.nextLine();

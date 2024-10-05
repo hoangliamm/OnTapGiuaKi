@@ -45,14 +45,7 @@ public class Teacher extends Person {
         // Implementation for updating teacher info
     }
 
-    private static Date parseDate(String dateOfBirthString) {
-        try {
-            return new SimpleDateFormat("dd-MM-yyyy").parse(dateOfBirthString);
-        } catch (Exception e) {
-            System.out.println("Wrong date format. Using default date.");
-            return new Date();
-        }
-    }
+   
 
     @Override
     public void displayInfo() {

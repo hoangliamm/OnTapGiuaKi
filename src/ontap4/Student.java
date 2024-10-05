@@ -34,22 +34,15 @@ public class Student extends Person {
 
     @Override
     public void addPerson() {
-        // Implementation for adding a student
+        
     }
 
     @Override
     public void updatePerson(String id) {
-        // Implementation for updating student info
+
     }
 
-    private static Date parseDate(String dateOfBirthString) {
-        try {
-            return new SimpleDateFormat("dd-MM-yyyy").parse(dateOfBirthString);
-        } catch (Exception e) {
-            System.out.println("Wrong date format. Using default date.");
-            return new Date();
-        }
-    }
+    
 
     @Override
     public void displayInfo() {

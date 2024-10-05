@@ -116,7 +116,7 @@ public class Processor {
                     break;
                 case 6:
                     // Display all students and teachers
-                    personList.displayEveryone();
+                    personList.displayAllPerson();
                     break;
                 case 7:
                     // Find the student with the highest GPA

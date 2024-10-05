@@ -1,9 +1,9 @@
-
-package ontap4;
+package ontapp;
 
 import java.util.Date;
 
-public abstract class Person implements IPerson{
+abstract public class Person implements IPerson {
+
     private String id;
     private String fullName;
     private Date dateOfBirth;
@@ -17,7 +17,6 @@ public abstract class Person implements IPerson{
         this.dateOfBirth = dateOfBirth;
     }
 
-    // Getters and Setters
     public String getId() {
         return id;
     }
@@ -42,9 +41,10 @@ public abstract class Person implements IPerson{
         this.dateOfBirth = dateOfBirth;
     }
 
-    // Abstract methods from the interface
-    public abstract void addPerson();
-    public abstract void updatePerson(String id);
-    public abstract void displayInfo();
-}
+    abstract public void addPerosn();
 
+    abstract public void updatePerosn(String id);
+
+    abstract public void displayInfo();
+
+}

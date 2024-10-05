@@ -47,7 +47,7 @@ public class Processor {
 
                     try {
                         Date dob = dateFormat.parse(dobString);
-                        personList.addStudent(new Student(studentId, studentName, dob, gpa, major));
+                        personList.addStudent(new Student(studentId,studentName, dob, gpa, major));
                     } catch (ParseException e) {
                         System.out.println("Invalid date format. Please enter the date in dd/MM/yyyy format.");
                     }
@@ -78,14 +78,14 @@ public class Processor {
                     // Update person by id
                     System.out.print("Enter Person ID to Update: ");
                     String updateId = scanner.nextLine();
-                    personList.updatePerson(updateId);
+                    personList.updatePersonById(updateId);
                     break;
 
                 case 4:
                     // Delete person by id
                     System.out.println("Enter Person ID to Delete: ");
                     String deleteId = scanner.nextLine();
-                    personList.deletePerson(deleteId);
+                    personList.deletePersonById(deleteId);
                     break;
 
                 case 5:

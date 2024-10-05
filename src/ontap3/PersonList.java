@@ -143,7 +143,7 @@ public class PersonList {
     }
 
     // Method to display all people (both students and teachers)
-    public void displayEveryone() {
+    public void displayAllPerson() {
         for (Person person : people) {
             person.displayInfo();
             System.out.println();
