@@ -10,9 +10,6 @@ public abstract class Person implements IPerson {
     private Date bookBorrowDate;
     private Date bookReturnDate;
 
-    public Person() {
-    }
-
     public Person(String id, String fullName, Date dateOfBirth, Date bookBorrowDate, Date bookReturnDate) {
         this.id = id;
         this.fullName = fullName;
@@ -61,7 +58,7 @@ public abstract class Person implements IPerson {
         this.bookReturnDate = bookReturnDate;
     }
 
-    @Override
+    // Abstract methods
     public abstract void addPerson();
 
     public abstract void updatePerson(String id);
@@ -69,7 +66,12 @@ public abstract class Person implements IPerson {
     public abstract void displayInfo();
 
     public boolean isBookOverdue() {
-        Date today = new Date();
-        return today.after(this.bookReturnDate);
+        if (bookBorrowDate != null && bookReturnDate != null) {
+            long differenceInMilliSeconds = bookReturnDate.getTime() - bookBorrowDate.getTime();
+            long differenceInDays = differenceInMilliSeconds / (1000 * 60 * 60 * 24); // convert milliseconds to days
+            return differenceInDays >= 30;
+        }
+        return false; 
+
     }
 }

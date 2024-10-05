@@ -1,17 +1,21 @@
 package ontap5;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
-public abstract class Student extends Person {
+public class Student extends Person {
 
-    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat();
+    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
     private float gpa;
     private String major;
 
-    public Student() {
+    // Constructor
+    public Student(String id, String fullName, Date dateOfBirth, Date bookBorrowDate, Date bookReturnDate) {
+        super(id, fullName, dateOfBirth, bookBorrowDate, bookReturnDate);
     }
 
-    public Student(float gpa, String major) {
+    public Student(String id, String fullName, Date dateOfBirth, Date bookBorrowDate, Date bookReturnDate, float gpa, String major) {
+        super(id, fullName, dateOfBirth, bookBorrowDate, bookReturnDate);
         this.gpa = gpa;
         this.major = major;
     }
@@ -33,22 +37,21 @@ public abstract class Student extends Person {
     }
 
     @Override
-    public abstract void addPerson();
+    public void addPerson() {
+    }
 
-    public abstract void updatePerson(String id);
+    @Override
+    public void updatePerson(String id) {
+    }
 
+    @Override
     public void displayInfo() {
-        System.out.println("Enter studentID: " + getId());
-        System.out.println("Enter fullName Student: " + getFullName());
-        System.out.println("Enter dateOfBirth: " + DATE_FORMAT.format(getDateOfBirth()));
-        System.out.println("Enter gpa: " + getGpa());
-        System.out.println("Enter major: " + getMajor());
-        System.out.println("Book Borrow Date: " + getBookBorrowDate());
-        System.out.println("Book Return Date: " + getBookReturnDate());
-        if (isBookOverdue()) {
-            System.out.println("Book is Overdue");
-        } else {
-            System.out.println("Book is Not Overdue");
-        }
+        System.out.println("StudentID: " + getId());
+        System.out.println("Full Name: " + getFullName());
+        System.out.println("Date of Birth: " + (getDateOfBirth() != null ? DATE_FORMAT.format(getDateOfBirth()) : "N/A"));
+        System.out.println("Book Borrow Date: " + (getBookBorrowDate() != null ? DATE_FORMAT.format(getBookBorrowDate()) : "N/A"));
+        System.out.println("Book Return Date: " + (getBookReturnDate() != null ? DATE_FORMAT.format(getBookReturnDate()) : "N/A"));
+        System.out.println("GPA: " + gpa);
+        System.out.println("Major: " + major);
     }
 }

@@ -1,115 +1,168 @@
 package ontap5;
+
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Scanner;
+import java.text.SimpleDateFormat;
 
 public class PersonList {
-    private ArrayList<Person> personList;
 
-    // Constructor
+    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
+
+    private List<Person> people;
+
     public PersonList() {
-        personList = new ArrayList<>();
+        this.people = new ArrayList<>();
     }
 
-    public void addStudent(String id, String fullName, Date dateOfBirth, Date bookBorrowDate, Date bookReturnDate, float gpa, String major) {
-        Student student = new Student(id, dateOfBirth, fullName, gpa, major, bookBorrowDate, bookReturnDate);
-        personList.add(student);
-        System.out.println("Student added successfully.");
+    public void addStudent(Student student) {
+        people.add(student);
     }
 
-    // Method to add a new teacher
-    public void addTeacher(String id, String fullName, Date dateOfBirth, Date bookBorrowDate, Date bookReturnDate, String department, String teachingSubject) {
-        Teacher teacher = new Teacher(id, fullName, dateOfBirth, bookBorrowDate, bookReturnDate, department, teachingSubject);
-        personList.add(teacher);
-        System.out.println("Teacher added successfully.");
+    public void addTeacher(Teacher teacher) {
+        people.add(teacher);
     }
 
-    // Method to update a person by ID
-    public void updatePersonById(String id) {
-        boolean found = false;
-        for (Person person : personList) {
-            if (person.getId().equals(id)) {
-                person.updatePerson(id); // Add necessary input fields or update logic here
-                found = true;
-                System.out.println("Person with ID " + id + " updated successfully.");
-                break;
-            }
-        }
-        if (!found) {
-            System.out.println("Person with ID " + id + " not found.");
-        }
-    }
-
-    // Method to delete a person by ID
-    public void deletePersonById(String id) {
-        boolean removed = personList.removeIf(person -> person.getId().equals(id));
-        if (removed) {
-            System.out.println("Person with ID " + id + " deleted successfully.");
-        } else {
-            System.out.println("Person with ID " + id + " not found.");
-        }
-    }
-
-    // Method to display all students and teachers
-    public void displayEveryone() {
-        if (personList.isEmpty()) {
-            System.out.println("No persons to display.");
-        } else {
-            for (Person person : personList) {
-                person.displayInfo();
-                System.out.println();
-            }
-        }
-    }
-
-    // Method to find the student with the highest GPA
     public Student findTopStudent() {
-        Student topStudent = null;
-        for (Person person : personList) {
+        Student highestGPAStudent = null;
+        for (Person person : people) {
             if (person instanceof Student) {
                 Student student = (Student) person;
-                if (topStudent == null || student.getGpa() > topStudent.getGpa()) {
-                    topStudent = student;
+                if (highestGPAStudent == null || student.getGpa() > highestGPAStudent.getGpa()) {
+                    highestGPAStudent = student;
                 }
             }
         }
-        return topStudent;
+        return highestGPAStudent;
     }
 
-    // Method to find teachers by department
-    public void findTeachersByDepartment(String department) {
-        boolean found = false;
-        System.out.println("Teachers in the " + department + " department:");
-        for (Person person : personList) {
+    public void updatePersonById(String id) {
+        Person person = findPersonById(id);
+        if (person != null) {
+            if (person instanceof Student) {
+                updateStudent((Student) person);
+            } else if (person instanceof Teacher) {
+                updateTeacher((Teacher) person);
+            }
+        } else {
+            System.out.println("Person with ID " + id + " not found.");
+        }
+    }
+
+    public void deletePersonById(String id) {
+        people.removeIf(person -> person.getId().equals(id));
+    }
+
+    private Person findPersonById(String id) {
+        for (Person person : people) {
+            if (person.getId().equals(id)) {
+                return person;
+            }
+        }
+        return null;
+    }
+
+    private void updateStudent(Student student) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter new Full Name: ");
+        String newName = scanner.nextLine();
+        if (!newName.isEmpty()) {
+            student.setFullName(newName);
+        }
+
+        System.out.print("Enter new Date of Birth (dd/MM/yyyy): ");
+        String newDobString = scanner.nextLine();
+        if (!newDobString.isEmpty()) {
+            try {
+                Date newDob = DATE_FORMAT.parse(newDobString);
+                student.setDateOfBirth(newDob);
+            } catch (Exception e) {
+                System.out.println("Invalid date format. Date not updated.");
+            }
+        }
+
+        System.out.print("Enter new GPA: ");
+        String gpaString = scanner.nextLine();
+        if (!gpaString.isEmpty()) {
+            try {
+                float newGpa = Float.parseFloat(gpaString);
+                student.setGpa(newGpa);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid GPA format. GPA not updated.");
+            }
+        }
+
+        System.out.print("Enter new Major: ");
+        String newMajor = scanner.nextLine();
+        if (!newMajor.isEmpty()) {
+            student.setMajor(newMajor);
+        }
+
+        System.out.println("Student details updated successfully.");
+    }
+
+    private void updateTeacher(Teacher teacher) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter new Full Name: ");
+        String newName = scanner.nextLine();
+        if (!newName.isEmpty()) {
+            teacher.setFullName(newName);
+        }
+
+        System.out.print("Enter new Date of Birth (dd/MM/yyyy): ");
+        String newDobString = scanner.nextLine();
+        if (!newDobString.isEmpty()) {
+            try {
+                Date newDob = DATE_FORMAT.parse(newDobString);
+                teacher.setDateOfBirth(newDob);
+            } catch (Exception e) {
+                System.out.println("Invalid date format. Date not updated.");
+            }
+        }
+
+        System.out.print("Enter new Department: ");
+        String newDepartment = scanner.nextLine();
+        if (!newDepartment.isEmpty()) {
+            teacher.setDepartment(newDepartment);
+        }
+
+        System.out.print("Enter new Teaching Subject: ");
+        String newSubject = scanner.nextLine();
+        if (!newSubject.isEmpty()) {
+            teacher.setTeachingSubject(newSubject);
+        }
+
+        System.out.println("Teacher details updated successfully.");
+    }
+
+    public void displayEveryone() {
+        for (Person person : people) {
+            person.displayInfo();
+            System.out.println();
+        }
+    }
+
+    public List<Teacher> findTeachersByDepartment(String department) {
+        List<Teacher> teachers = new ArrayList<>();
+        for (Person person : people) {
             if (person instanceof Teacher) {
                 Teacher teacher = (Teacher) person;
                 if (teacher.getDepartment().equalsIgnoreCase(department)) {
-                    teacher.displayInfo();
-                    System.out.println();
-                    found = true;
+                    teachers.add(teacher);
                 }
             }
         }
-        if (!found) {
-            System.out.println("No teachers found in the " + department + " department.");
-        }
+        return teachers;
     }
 
-    // Method to check if the book is overdue
-    public void checkBookBorrowing(String id) {
-        boolean found = false;
-        for (Person person : personList) {
-            if (person.getId().equals(id)) {
-                found = true;
-                if (person.isBookOverdue()) {
-                    System.out.println("Overdue");
-                } else {
-                    System.out.println("No overdue");
-                }
-                break;
+    public void checkBookBorrowing() {
+        for (Person person : people) {
+            if (person.isBookOverdue()) {
+                System.out.println(person.getFullName() + ": Overdue");
+            } else {
+                System.out.println(person.getFullName() + ": No overdue");
             }
-        }
-        if (!found) {
-            System.out.println("Person with ID " + id + " not found.");
         }
     }
 }
