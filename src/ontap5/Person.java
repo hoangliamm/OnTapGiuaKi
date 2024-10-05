@@ -58,11 +58,13 @@ public abstract class Person implements IPerson {
         this.bookReturnDate = bookReturnDate;
     }
 
-    // Abstract methods
+    @Override
     public abstract void addPerson();
 
+    @Override
     public abstract void updatePerson(String id);
 
+    @Override
     public abstract void displayInfo();
 
     public boolean isBookOverdue() {
